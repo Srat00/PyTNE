@@ -4,4 +4,4 @@ import saveload
 import struct
 
 route.routeInit()
-print(core.route_list)
+print(core.route_list) #디버그
