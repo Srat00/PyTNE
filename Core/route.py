@@ -1,4 +1,4 @@
-import core
+import globalVar
 
 """  
 	[루트 파일 초기화]
@@ -26,7 +26,7 @@ def routeInit():
 	i = 0
 	
 	for i in range(len(route_buffer)):
-		#해당 방 번호
+		#해당 방 번호 (index 0)
 		if route_buffer[i] == '!':
 			a = int(route_buffer[i + 1]) * 100
 			b = int(route_buffer[i + 2]) * 10
@@ -35,14 +35,14 @@ def routeInit():
 			Temp_RF[0] = a + b + c
 			i += 3
 		
-		#선택지 번호
+		#선택지 번호 (index 1)
 		if route_buffer[i] == '*':
 			a = int(route_buffer[i + 1])
 			
 			Temp_RF[1] = a
 			i += 1
 		
-		#이동 방 번호
+		#이동 방 번호 (index 2)
 		if route_buffer[i] == '>':
 			a = int(route_buffer[i + 1]) * 100
 			b = int(route_buffer[i + 2]) * 10
@@ -53,7 +53,7 @@ def routeInit():
 
 			#배열에 저장
 			List_temp_RF = list(Temp_RF)
-			core.route_list.append(List_temp_RF)
+			globalVar.route_list.append(List_temp_RF)
 						
 		#Flush
 		target_room = 0;
@@ -61,5 +61,15 @@ def routeInit():
 		return_room = 0;
 			
 			
+	print("Route Read Complete.")
+	
+def routeSelect(room, select):
+	for i in range(0,len(globalVar.route_list)):
+		if globalVar.route_list[i][0] == int(room) and globalVar.route_list[i][1] == int(select):
+			return globalVar.route_list[i][2]
 		
-print("Route Read Complete.")
+	return -1
+	
+	
+	
+	
