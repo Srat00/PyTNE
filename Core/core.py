@@ -15,7 +15,7 @@ def printScript(sentence, sleepTime=0.1):
 
 def routeCheck():
 	while True:
-		print("당신의 선택은? >> ")
+		print("당신의 선택은? >> ", end="")
 		select = input()
 		globalVar.status.next_room = route.routeSelect(globalVar.status.room, int(select))
 		if(globalVar.status.next_room != -1):
