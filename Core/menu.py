@@ -1,5 +1,20 @@
+#공식 모듈
+import os
+#커스텀 모듈
 import saveload
 
+"""
+	[게임 인트로 로고]
+	Script 파일에 있는 Intro.txt 파일을 열어서 출력
+"""
+def intro():
+	if os.path.isfile("Script/Intro.txt") == False:
+		print("인트로 파일이 존재하지 않습니다!!!")
+		input()
+		quit()
+		
+	intro_file = open("Script/Intro.txt", "r")
+	print(intro_file.read())
 
 """
     [메인메뉴]
@@ -10,7 +25,7 @@ import saveload
 """
 def mainMenu():
     while True:
-        print("메뉴 값을 입력하세요. >>", end="")
+        print("메뉴 값을 입력하세요. >> ", end="")
         a = input()
         
         if int(a) == 1:
@@ -36,7 +51,7 @@ def endingMenu():
         print("1. 메인 화면으로 0. 종료 \n")
         
         while True:
-            print("메뉴 값을 입력하세요. >>", end="")
+            print("메뉴 값을 입력하세요. >> ", end="")
             a = input
             
             if int(a) == 1:
