@@ -1,11 +1,14 @@
+#커스텀 모듈
 import globalVar
 import route
 import saveload
 import struct
 import core
+import menu
 
 route.routeInit()
-#print(globalVar.route_list) #디버그
+menu.intro()
+globalVar.status.room = menu.mainMenu()
 while True:
 	if core.gameCore() == 1:
 		break

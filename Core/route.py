@@ -1,3 +1,4 @@
+#커스텀 모듈
 import globalVar
 
 """  
@@ -8,18 +9,12 @@ import globalVar
 	* → 선택지 번호  ( 1번 인덱스 )
 	> → 이동되는 방 번호 ( 2번 인덱스 )
 """
-
 def routeInit():
+    if os.path.isfile("Script/Route.txt") == False:
+		print("Route.txt 파일이 존재하지 않습니다!!")
+		input()
+		quit()
 	game_route = open("Script/Route.txt", "r")
-	"""
-	#파일이 있는지 체크
-    if(game_route == None)
-    {
-        print("Route.txt가 발견되지 않았습니다! 게임을 실행할 수 없습니다!")
-        input()
-        quit()
-    }
-	"""
 	Temp_RF = [0,0,0]
 	route_buffer = game_route.read()
 	
@@ -62,7 +57,13 @@ def routeInit():
 			
 			
 	print("Route Read Complete.")
-	
+
+"""
+    [분기점 불러오기]
+	루트 매니저 array 접근 후
+	room → target_room, select → select_route 에 해당하는 요소 검색 후 return_room 반환
+	만약 해당되는 요소가 없다면 -1 반환
+"""
 def routeSelect(room, select):
 	for i in range(0,len(globalVar.route_list)):
 		if globalVar.route_list[i][0] == int(room) and globalVar.route_list[i][1] == int(select):
