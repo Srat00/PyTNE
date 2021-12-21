@@ -1,3 +1,5 @@
+#공식 모듈
+import os
 #커스텀 모듈
 import globalVar
 
@@ -14,7 +16,7 @@ def routeInit():
 		print("Route.txt 파일이 존재하지 않습니다!!")
 		input()
 		quit()
-	game_route = open("Script/Route.txt", "r")
+		game_route = open("Script/Route.txt", "r")
 	Temp_RF = [0,0,0]
 	route_buffer = game_route.read()
 	
