@@ -5,6 +5,7 @@ import os
 import globalVar
 import route
 import saveload
+import menu
 
 """
 	[문자 출력]
@@ -14,12 +15,31 @@ import saveload
 """
 def printScript(sentence, sleepTime=0.1):
 	for i in range(len(sentence)):
+		#브레이크 포인트
 		if(sentence[i] == '`'):
 			input()
 			break
+		#속도 조절
+		if(sentence[i] == '>'):
+			delayRate = (int(sentence[i+1]) * 10) + sentence[i+2]
+			sleepTime = delayRate*0.01
+			break
+		#선택지
 		if(sentence[i] == '$'):
-			routeCheck()
-			return 1
+			if(sentence[i+1] != '$'):
+				routeCheck()
+				return 1
+			else:
+				print('$')
+				i += 2
+		#게임 끝
+		if (sentence[i] == '_'):
+			if (sentence[i + 1] != '_'):
+				menu.endingMenu()
+				return 1
+			else:
+				print('_')
+				i += 2
 		print(sentence[i], end="")
 		time.sleep(sleepTime)
 		
@@ -64,4 +84,3 @@ def gameCore():
 	for i in range(len(script_buffer)):
 		if printScript(script_buffer[i], 0.02) == 1:
 			break
-		
