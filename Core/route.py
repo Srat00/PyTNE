@@ -12,11 +12,11 @@ import globalVar
 	> → 이동되는 방 번호 ( 2번 인덱스 )
 """
 def routeInit():
-    if os.path.isfile("Script/Route.txt") == False:
+	if os.path.isfile("Script/Route.txt") == False:
 		print("Route.txt 파일이 존재하지 않습니다!!")
 		input()
 		quit()
-		game_route = open("Script/Route.txt", "r")
+	game_route = open("Script/Route.txt", "r")
 	Temp_RF = [0,0,0]
 	route_buffer = game_route.read()
 	

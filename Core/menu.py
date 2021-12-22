@@ -58,7 +58,7 @@ def endingMenu():
 
     while True:
         print("메뉴 값을 입력하세요. >> ", end="")
-        a = input
+        a = input()
 
         if int(a) == 1:
             return 1
