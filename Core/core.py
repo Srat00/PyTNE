@@ -14,34 +14,36 @@ import menu
 	특수 기능들에 대한 예외처리도 여기서 담당한다 (`, $, $$, _, __, >nn)
 """
 def printScript(sentence, sleepTime=0.1):
-	for i in range(len(sentence)):
+	i = 0
+	while i != len(sentence):
 		#브레이크 포인트
 		if(sentence[i] == '`'):
 			input()
-			break
+			i += 1
 		#속도 조절
-		if(sentence[i] == '>'):
-			delayRate = (int(sentence[i+1]) * 10) + sentence[i+2]
+		elif(sentence[i] == '>'):
+			delayRate = (int(sentence[i+1]) * 10) + int(sentence[i+2])
 			sleepTime = delayRate*0.01
-			break
+			i += 2
 		#선택지
-		if(sentence[i] == '$'):
-			if(sentence[i+1] != '$'):
+		elif(sentence[i] == '$'):
+			if(sentence[i+1] == '$'):
 				routeCheck()
 				return 1
 			else:
-				print('$')
-				i += 2
+				print('$', end="")
 		#게임 끝
-		if (sentence[i] == '_'):
-			if (sentence[i + 1] != '_'):
+		elif (sentence[i] == '_'):
+			if (sentence[i+1] == '_'):
 				menu.endingMenu()
 				return 1
 			else:
-				print('_')
-				i += 2
-		print(sentence[i], end="")
-		time.sleep(sleepTime)
+				print('_', end="")
+		else:
+			print(sentence[i], end="")
+			time.sleep(sleepTime)
+			
+		i += 1
 		
 """
 	[분기점 선택기]
@@ -82,5 +84,5 @@ def gameCore():
 	
 	i = 0
 	for i in range(len(script_buffer)):
-		if printScript(script_buffer[i], 0.02) == 1:
+		if printScript(script_buffer, 0.02) == 1:
 			break
