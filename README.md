@@ -1,11 +1,11 @@
 # PyTNE - Text Novel Engine in Python
 ### PyTNE는 인트로, 분기점, 내용을 수정할 수 있는 텍스트 어드벤쳐 실행기입니다.
-Text Novel Engine Python 포팅 버전
+Text Novel Engine Python 포팅 + GUI 버전
 
 ### TODO
 - Script 파일 정리
 - 문법 재정립
-- endingMenu 통해서 다시 시작하는 기능
+- GUI 만들기
 
 ### Complete
 - 루트매니저 불러오기 (21.12.16)
