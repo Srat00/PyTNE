@@ -2,11 +2,14 @@
 import os
 # 커스텀 모듈
 import saveload
+import GUI
 
 """
 	[게임 인트로 로고]
 	Script 파일에 있는 Intro.txt 파일을 열어서 출력
 """
+
+
 def intro():
     if os.path.isfile("Script/Intro.txt") == False:
         print("인트로 파일이 존재하지 않습니다!!!")
