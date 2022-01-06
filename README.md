@@ -3,9 +3,7 @@
 Text Novel Engine Python 포팅 + GUI 버전
 
 ### TODO
-- Script 파일 정리
-- 문법 재정립
-- GUI 만들기
+- GUI화 하기!!
 
 ### Complete
 - 루트매니저 불러오기 (21.12.16)
