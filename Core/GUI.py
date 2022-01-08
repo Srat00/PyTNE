@@ -1,23 +1,21 @@
-from PyQt5.QtWidgets import QWidget, QApplication, QLabel, QVBoxLayout, QTextBrowser
-from PyQt5.QtCore import Qt
-from PyQt5 import QtGui
+from PyQt5.QtWidgets import *
+from PyQt5 import uic
 import sys
+import ImageResource_rc
+
+form_class = uic.loadUiType("Core/GUI.ui")[0]
 
 
-class Window(QWidget):
+class Window(QMainWindow, form_class):
 
     def __init__(self):
         super().__init__()
-        self.setGeometry(300, 300, 400, 300)
-        self.setWindowTitle("Text Novel Engine")
-
-        self.text = QTextBrowser(self)
-        self.text.setGeometry(0, 0, 350, 250)
-        self.text.append("Text")
-        layout = QVBoxLayout()
-        self.setLayout(layout)
+        self.setupUi(self)
+        self.setWindowTitle("Text Novel Engine v2.0")
 
 
-app = QApplication(sys.argv)
-root = Window()
-sys.exit(app.exec_())
+if __name__ == "__main__":
+    app = QApplication(sys.argv)
+    root = Window()
+    root.show()
+    sys.exit(app.exec_())
