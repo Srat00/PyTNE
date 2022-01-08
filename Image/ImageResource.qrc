@@ -1,0 +1,5 @@
+<RCC>
+  <qresource prefix="MyPre">
+    <file>Temp.png</file>
+  </qresource>
+</RCC>
