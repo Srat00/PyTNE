@@ -16,8 +16,8 @@ def intro():
         input()
         quit()
 
-    intro_file = open("Script/Intro.txt", "r")
-    print(intro_file.read())
+    intro_file = open("Script/Intro.txt", "r", encoding='UTF8')
+    return intro_file.read()
 
 
 """
