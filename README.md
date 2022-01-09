@@ -3,7 +3,11 @@
 Text Novel Engine Python 포팅 + GUI 버전
 
 ### TODO
-- GUI화 하기!!
+- !GUI!
+- GUI 디자인하기
+- Core 부분 끌어오기
+- SaveLoad 부분 끌어오기
+- Menu 부분 끌어오기
 
 ### Complete
 - 루트매니저 불러오기 (21.12.16)
