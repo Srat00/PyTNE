@@ -1,7 +1,9 @@
 from PyQt5.QtWidgets import *
 from PyQt5 import uic
+from PyQt5 import Qt
 import sys
 import ImageResource_rc
+import menu
 
 form_class = uic.loadUiType("Core/GUI.ui")[0]
 
@@ -12,6 +14,14 @@ class Window(QMainWindow, form_class):
         super().__init__()
         self.setupUi(self)
         self.setWindowTitle("Text Novel Engine v2.0")
+        self.RoomLoad.clicked.connect(self.GUIIntro)
+        self.Select.returnPressed.connect(self.InputCheck)
+
+    def GUIIntro(self):
+        self.GameText.setPlainText(menu.intro())
+
+    def InputCheck(self):
+        self.GameText.setPlainText(self.Select.toPlainText())
 
 
 if __name__ == "__main__":
