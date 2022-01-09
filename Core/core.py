@@ -19,12 +19,8 @@ import GUI
 def printScript(sentence, sleepTime=0.1):
     i = 0
     while i != len(sentence):
-        # 브레이크 포인트
-        if(sentence[i] == '`'):
-            input()
-            i += 1
         # 속도 조절
-        elif(sentence[i] == '>'):
+        if(sentence[i] == '>'):
             delayRate = (int(sentence[i+1]) * 10) + int(sentence[i+2])
             sleepTime = delayRate*0.01
             i += 2
