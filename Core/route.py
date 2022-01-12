@@ -15,10 +15,10 @@ import GUI
 
 
 def routeInit():
-    if os.path.isfile("Script/Route.txt") == False:
-        print("Route.txt 파일이 존재하지 않습니다!!")
-        input()
-        quit()
+    filePath = globalVar.FolderName + "/Script/Route.txt"
+    if os.path.isfile(filePath) == False:
+        print(filePath + " 파일이 존재하지 않습니다!!")
+
     game_route = open("Script/Route.txt", "r")
     Temp_RF = [0, 0, 0]
     route_buffer = game_route.read()

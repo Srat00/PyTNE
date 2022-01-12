@@ -16,33 +16,29 @@ import GUI
 """
 
 
-def printScript(sentence, sleepTime=0.1):
-    i = 0
-    while i != len(sentence):
-        # 속도 조절
-        if(sentence[i] == '>'):
-            delayRate = (int(sentence[i+1]) * 10) + int(sentence[i+2])
-            sleepTime = delayRate*0.01
-            i += 2
-        # 선택지
-        elif(sentence[i] == '$'):
-            if(sentence[i+1] == '$'):
-                routeCheck()
-                return 1
-            else:
-                print('$', end="")
-        # 게임 끝
-        elif (sentence[i] == '_'):
-            if (sentence[i+1] == '_'):
-                menu.endingMenu()
-                return 1
-            else:
-                print('_', end="")
+def printScript(sentence, i, sleepTime=0.1):
+    # 속도 조절
+    if(sentence[i] == '>'):
+        delayRate = (int(sentence[i+1]) * 10) + int(sentence[i+2])
+        sleepTime = delayRate*0.01
+        i += 2
+    # 선택지
+    elif(sentence[i] == '$'):
+        if(sentence[i+1] == '$'):
+            routeCheck()
+            return 1
         else:
-            print(sentence[i], end="")
-            time.sleep(sleepTime)
-
-        i += 1
+            print('$', end="")
+    # 게임 끝
+    elif (sentence[i] == '_'):
+        if (sentence[i+1] == '_'):
+            menu.endingMenu()
+            return 1
+        else:
+            print('_', end="")
+    else:
+        return sentence[i]
+        time.sleep(sleepTime)
 
 
 """
@@ -79,16 +75,12 @@ def routeCheck():
 
 
 def gameCore():
-    file_name = "Script/Script_" + str(globalVar.status.room) + ".txt"
+    file_name = globalVar.FolderName + "/Script/Script_" + \
+        str(globalVar.status.room) + ".txt"
+
+    print(file_name)
+
     if os.path.isfile(file_name) == False:
-        print("Script_" + str(globalVar.status.room) + ".txt 파일이 존재하지 않습니다!!")
-        input()
-        quit()
+        return file_name + " 파일이 존재하지 않습니다!!"
 
-    game_script = open(file_name, "r", encoding='utf-8')
-    script_buffer = game_script.read()
-
-    i = 0
-    for i in range(len(script_buffer)):
-        if printScript(script_buffer, 0.02) == 1:
-            break
+    globalVar.game_script = open(file_name, "r", encoding='utf-8')
