@@ -12,5 +12,7 @@ class game_framework:
 
 status = game_framework(-1, 0)
 
+sleepTime = 0.1
+
 FolderName = ""
 game_script = ""

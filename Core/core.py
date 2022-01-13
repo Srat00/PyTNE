@@ -1,5 +1,4 @@
 # 공식 모듈
-import time
 import os
 # 커스텀 모듈
 import globalVar
@@ -16,42 +15,29 @@ import GUI
 """
 
 
-def printScript(sentence, i, sleepTime=0.1):
+def printScript(sentence, i):
     # 속도 조절
     if(sentence[i] == '>'):
         delayRate = (int(sentence[i+1]) * 10) + int(sentence[i+2])
-        sleepTime = delayRate*0.01
+        globalVar.sleepTime = delayRate*0.01
         i += 2
     # 선택지
-    elif(sentence[i] == '$'):
-        if(sentence[i+1] == '$'):
-            routeCheck()
-            return 1
-        else:
-            print('$', end="")
+
     # 게임 끝
-    elif (sentence[i] == '_'):
-        if (sentence[i+1] == '_'):
-            menu.endingMenu()
-            return 1
-        else:
-            print('_', end="")
+
     else:
         return sentence[i]
-        time.sleep(sleepTime)
 
 
 """
 	[분기점 선택기]
 	선택지 입력받은 후 routeSelect를 다음 룸으로 지정.
 	선택 후 룸을 옮기고 상태를 저장한다.
-"""
+
 
 
 def routeCheck():
     while True:
-        print("당신의 선택은? >> ", end="")
-        select = input()
         if(select != ""):
             globalVar.status.next_room = route.routeSelect(
                 globalVar.status.room, int(select))
@@ -61,7 +47,7 @@ def routeCheck():
                 saveload.autoSave(globalVar.status.room)
                 break
         print("잘못된 선택입니다!")
-
+"""
 
 """
 	[게임 작동부]
@@ -77,8 +63,6 @@ def routeCheck():
 def gameCore():
     file_name = globalVar.FolderName + "/Script/Script_" + \
         str(globalVar.status.room) + ".txt"
-
-    print(file_name)
 
     if os.path.isfile(file_name) == False:
         return file_name + " 파일이 존재하지 않습니다!!"

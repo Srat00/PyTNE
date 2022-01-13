@@ -3,6 +3,7 @@ from PyQt5 import uic
 from PyQt5 import Qt
 from PyQt5.QtWidgets import *
 import sys
+import time
 
 import ImageResource_rc
 import menu
@@ -23,10 +24,10 @@ class Window(QMainWindow, form_class):
 
         # UI 연결
         self.GameLoad.clicked.connect(self.PlaysetLoad)
+        self.Line_Selection.returnPressed.connect(self.Select)
 
         # 디버그 옵션
         self.RoomLoad.clicked.connect(self.GUIIntro)
-        self.Line_Selection.returnPressed.connect(self.InputCheck)
 
     # =======================   UI 연결 =======================
 
@@ -37,41 +38,69 @@ class Window(QMainWindow, form_class):
         self.Line_Nowplay.setText(menu.manifest())
         route.routeInit()
 
-    def InputCheck(self):
-        selectNo = self.Line_Selection.text()
+    def Select(self):
+        print(globalVar.status.room)
+        if self.Line_Selection.text() != "":
+            selectNo = self.Line_Selection.text()
+        else:
+            self.GameText.append("잘못된 선택 입니다!")
+            return
+
         self.Line_Selection.setText("")
 
+        # 메인화면
         if globalVar.status.room == -1:
-            if selectNo == 1:
-                globalVar.status.room = 0
-            elif selectNo == 2:
+            if selectNo == '1':
+                self.GameCore(selectNo)
+
+            elif selectNo == '2':
                 globalVar.status.room = saveload.loadSave()
-            elif selectNo == 0:
+                self.GameCore(selectNo)
+
+            elif selectNo == '0':
                 quit()
+
             else:
                 self.GameText.append("잘못된 선택 입니다!")
 
-        else:
-            globalVar.status.next_room = route.routeSelect(
-                globalVar.status.room, int(selectNo))
+        elif globalVar.status.room == -2:
+            globalVar.status.room = -1
+            self.GameText.setPlainText(menu.intro())
 
-            if(globalVar.status.next_room != -1):
-                self.GameText.setPlainText("")
-                self.GameText.append(selectNo + " 번을 선택했습니다.")
-                globalVar.status.room = globalVar.status.next_room
-                saveload.autoSave(globalVar.status.room)
+        else:
+            self.GameCore(selectNo)
+
+    def GameCore(self, selectNo):
+        self.GameText.setPlainText("")
+        globalVar.status.next_room = route.routeSelect(
+            globalVar.status.room, int(selectNo))
+
+        if globalVar.status.next_room == 404:
+            self.GameText.append("잘못된 선택 입니다!")
+            return
+
+        if(globalVar.status.next_room != -1):
+            self.GameText.setPlainText("")
+            self.GameText.append(selectNo + " 번을 선택했습니다.")
+            globalVar.status.room = globalVar.status.next_room
+            saveload.autoSave(globalVar.status.room)
+
+        else:
+            globalVar.status.room = 0
 
         core.gameCore()
-        script_buffer = globalVar.game_script.read()
+        script_buffer = globalVar.game_script.readlines()
 
-        self.GameText.setPlainText("")
+        i = 0
+        while i != len(script_buffer)-1:
+            self.GameText.append(core.printScript(script_buffer, i))
+            i += 1
 
-        print(len(script_buffer))
-
-        #i = 0
-        # while i != len(script_buffer):
-        #    self.GameText.append(core.printScript(script_buffer, i, 0.02))
-        #    i += 1
+        if script_buffer[len(script_buffer)-1] == '$':
+            self.GameText.append("당신의 선택은?")
+        elif script_buffer[len(script_buffer)-1] == '_':
+            self.GameText.append("게임이 끝났습니다... 0. 메인화면으로 돌아가기")
+            globalVar.status.room = -2
 
     # ======================= 디버그 옵션 =======================
 

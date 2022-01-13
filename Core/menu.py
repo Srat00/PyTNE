@@ -63,7 +63,6 @@ def mainMenu(a):
 
 
 def endingMenu():
-    print("게임이 끝났습니다. 다시 하시겠습니까?")
     print("1. 메인 화면으로 0. 종료 \n")
 
     while True:

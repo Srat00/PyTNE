@@ -19,7 +19,7 @@ def routeInit():
     if os.path.isfile(filePath) == False:
         print(filePath + " 파일이 존재하지 않습니다!!")
 
-    game_route = open("Script/Route.txt", "r")
+    game_route = open(filePath, "r")
     Temp_RF = [0, 0, 0]
     route_buffer = game_route.read()
 
@@ -59,7 +59,7 @@ def routeInit():
         target_room = 0
         select_route = 0
         return_room = 0
-
+    print(globalVar.route_list)
     print("Route Read Complete.")
 
 
