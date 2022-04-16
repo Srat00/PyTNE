@@ -32,8 +32,7 @@ class Window(QMainWindow, form_class):
     # =======================   UI 연결 =======================
 
     def PlaysetLoad(self):
-        globalVar.FolderName = QFileDialog.getExistingDirectory(
-            self, "게임 불러오기")
+        globalVar.FolderName = QFileDialog.getExistingDirectory(self, "게임 불러오기")
         self.GameText.setPlainText(menu.intro())
         self.Line_Nowplay.setText(menu.manifest())
         route.routeInit()
