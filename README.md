@@ -5,7 +5,6 @@ Text Novel Engine Python 포팅 + GUI 버전
 ### TODO
 - !GUI!
 - GUI 디자인하기
-- 한 글자씩 출력되도록 하기
 - 이미지 출력되도록 하기
 - 모듈형 게임 파일 양식 정립하기
 
