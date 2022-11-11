@@ -4,6 +4,7 @@ from PyQt5 import Qt
 from PyQt5.QtWidgets import *
 import sys
 import time
+import os
 
 import ImageResource_rc
 import menu
@@ -12,7 +13,8 @@ import globalVar
 import saveload
 import route
 
-form_class = uic.loadUiType("Core/GUI.ui")[0]
+currentPath = os.getcwd()
+form_class = uic.loadUiType(currentPath + "\\PyTNE\\Core\\GUI.ui")[0]
 
 
 class Window(QMainWindow, form_class):
@@ -82,6 +84,8 @@ class Window(QMainWindow, form_class):
             self.GameText.setPlainText("")
             self.GameText.append(selectNo + " 번을 선택했습니다.")
             globalVar.status.room = globalVar.status.next_room
+            #여기에 You Are Here 추가
+            self.Label_Youarehere.setText(menu.manifest())
             saveload.autoSave(globalVar.status.room)
 
         else:
